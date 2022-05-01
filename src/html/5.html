@@ -98,10 +98,22 @@
 			let p = document.createElement("p");
 			p.innerText = text;
 
+			let delButton = document.createElement("button");
+			delButton.textContent = "Удалить";
+			delButton.addEventListener("click", deleteCurrentTask);
+			delButton.classList.add("delete-button");
+
 			div.append(input);
 			div.append(p);
+			div.append(delButton);
 
 			return div;
+		}
+
+		function deleteCurrentTask() {
+			if (confirm("Вы действительно хотите удалить задачу")) {
+				this.parentElement.remove();
+			}
 		}
 
 		function changeTaskState() {

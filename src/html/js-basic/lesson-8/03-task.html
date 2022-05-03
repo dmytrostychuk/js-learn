@@ -19,13 +19,10 @@
         Перепишите сценарий таким образом, чтобы в коде устанавливался один обработчик для всех трех кнопок, при этом 
         результат работы сценария не должен измениться.
         */
-        let buttons = document.querySelectorAll("button");
-        buttons.forEach(btn => {
-            btn.addEventListener("click", clickHandler);
-        });
+        document.addEventListener("click", clickHandler);
 
-        function clickHandler() {
-            alert(this.innerText);
+        function clickHandler(e) {
+            alert(e.target.innerText)
         }
     </script>
 </body>

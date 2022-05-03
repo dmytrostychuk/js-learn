@@ -55,6 +55,40 @@
         за курсором до момента обжатия клавиши мыши.
         */
 
+        let generateButton = document.querySelector("#generateButton");
+        let interactivePanel = document.querySelector("#interactivePanel");
+        let move = false;
+        let offsetX, offsetY;
+        let currentDiv;
+        const genereteButtonHeight = parseInt(getComputedStyle(generateButton).height); // parseInt конвертирует строку с буквенными символами и числами в конце в число, например 100px в 100
+
+        generateButton.addEventListener("click", function () {
+            interactivePanel.innerHTML = ""; // удаляем все содержимое
+            for (let i = 0; i < 100; i++) {
+                interactivePanel.append(generateElement());
+            }
+        });
+
+        interactivePanel.addEventListener("mousedown", function (e) {
+            if (e.target.classList.contains("interactiveElement")) { // обрабатываем событие только от элементаов с классом interactiveElement 
+                move = true;
+                offsetX = e.offsetX;
+                offsetY = e.offsetY;
+                currentDiv = e.target;
+            }
+        });
+
+        interactivePanel.addEventListener("mousemove", function (e) {
+            if (move) {
+                currentDiv.style.top = e.clientY - offsetY - genereteButtonHeight + "px";
+                currentDiv.style.left = e.clientX - offsetX + "px";
+            }
+        });
+
+        interactivePanel.addEventListener("mouseup", function (e) {
+            move = false;
+        });
+
         // Создает и возвращает div с классом interactiveElement со случайной позицией в текущем окне
         function generateElement() {
             let div = document.createElement("div");

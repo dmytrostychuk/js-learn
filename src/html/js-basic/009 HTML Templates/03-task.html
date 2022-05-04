@@ -92,22 +92,13 @@
         let startMessage = document.querySelector("#start-message");
         let taskList = document.querySelector(".task-list");
 
+        let templateContent = document.querySelector("#template").innerHTML;
+
         addTaskButton.addEventListener("click", addTaskHandler);
         taskList.addEventListener("click", changeTaskState);
 
         function createTask(text) {
-            let div = document.createElement("div");
-            div.classList.add("task");
-
-            let input = document.createElement("input");
-            input.type = "checkbox";
-
-            let p = document.createElement("p");
-            p.innerText = text;
-
-            div.append(input);
-            div.append(p);
-
+            let div = Mustache.render(templateContent, { text: text });
             return div;
         }
 
@@ -129,7 +120,7 @@
                 if (!startMessage.hidden) startMessage.hidden = true;
 
                 let newTask = createTask(taskNameInput.value);
-                taskList.append(newTask);
+                taskList.insertAdjacentHTML("afterbegin", newTask);
                 taskNameInput.value = "";
             } else {
                 alert("введите имя задачи");

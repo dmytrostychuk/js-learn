@@ -107,7 +107,7 @@
             this.isDone = false;
             this.div = null;
 
-            this.createIn = function (element) {
+            Task.prototype.createIn = function (element) {
                 this.div = document.createElement("div");
                 this.div.classList.add("task");
 
@@ -123,7 +123,7 @@
                 element.append(this.div);
             }
 
-            this.changeState = function (element) {
+            Task.prototype.changeState = function (element) {
                 this.isDone = !this.isDone;
                 element.classList.toggle("completed");
             }

@@ -23,17 +23,16 @@
             }
 
             move() {
-                console.log(`Машина ${this.model} двигается со скоростью 80 км/час`);
+                console.log(`Машина ${this.model} движется со скоростью 80 км/час`);
             }
         }
 
         class Truck extends Car {
             weight;
             maxCargo;
-            model;
 
             constructor(model, maxCargo) {
-                this.model = model;
+                super(model);
                 this.maxCargo = maxCargo;
             }
 
@@ -51,7 +50,7 @@
         let v1 = new Car("Mazda");
         v1.move();
 
-        let v2 = new Truck();
+        let v2 = new Truck("КАМАЗ", 2000);
         v2.loadCargo(1500);
         v2.move();
     </script>

@@ -13,6 +13,8 @@
         /*
         Задание:
         Найдите и исправьте проблему в методах getGreaterThanThreshold и getLessThanThreshold
+
+        функции обратного вызова для filter заменены на стрелочные функции
         */
 
         class Numbers {
@@ -24,18 +26,14 @@
                 this.#threshold = threshold;
             }
 
-            // Возвращает все значения из массива values, которые больше, чем значение переменной threshold
+            // Возвращает все значения из массива values, которые больше чем значение переменной threshold
             getGreaterThanThreshold() {
-                return this.#values.filter(function (v) {
-                    return v > this.#threshold;
-                })
+                return this.#values.filter(v => v > this.#threshold);
             }
 
-            // возвращает все значения из массива values, которые меньше, чем значение переменной threshold 
+            // возвращает все значения из массива values, которые меньше чем значение переменной threshold 
             getLessThanThreshold() {
-                return this.#values.filter(function (v) {
-                    return v < this.#threshold;
-                })
+                return this.#values.filter(v => v < this.#threshold);
             }
         }
 

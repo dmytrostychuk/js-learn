@@ -12,36 +12,62 @@
     <script>
         /*
         Задание:
-        Перепишите класс Numbers, используя шаблон "модуль".
-        Поля values и threshold должны быть закрыты в модуле и сохраняться в замыкании.
+        Перепишите класс Numbers используя шаблон модуль.
+        Поля values и threshold должны быть закрыты в модуле и сохранятся в замыкании.
         getGreaterThanThreshold и getLessThanThreshold должны быть открытыми частями модуля.
 
         На практике, использование классов более предпочтительно, за исключением ситуаций,
         когда процесс разработки и целевая среда выполнения не дает возможность использовать 
-        ключевое солово class
+        ключеове солов class
         */
 
-        class Numbers {
-            #values;
-            #threshold;
+        // class Numbers {
+        //     #values;
+        //     #threshold;
 
-            constructor(threshold, values) {
-                this.#values = values;
-                this.#threshold = threshold;
-            }
+        //     constructor(threshold, values) {
+        //         this.#values = values;
+        //         this.#threshold = threshold;
+        //     }
 
-            // Возвращает все значения из массива values, которые больше, чем значение переменной threshold
-            getGreaterThanThreshold() {
-                return this.#values.filter(v => v > this.#threshold);
-            }
+        //     // Возвращает все значения из массива values, которые больше, чем значение переменной threshold
+        //     getGreaterThanThreshold() {
+        //         return this.#values.filter(v => v > this.#threshold);
+        //     }
 
-            // возвращает все значения из массива values, которые меньше, чем значение переменной threshold 
-            getLessThanThreshold() {
-                return this.#values.filter(v => v < this.#threshold);
+        //     // возвращает все значения из массива values, которые меньше, чем значение переменной threshold 
+        //     getLessThanThreshold() {
+        //         return this.#values.filter(v => v < this.#threshold);
+        //     }
+        // }
+
+        // let numbers = new Numbers(50, [10, 20, 23, 11, 5, 6, 90, 33, 45, 67]);
+        // let gt = numbers.getGreaterThanThreshold();
+        // let lt = numbers.getLessThanThreshold();
+
+        // console.log(gt);
+        // console.log(lt);
+
+        function createNumbers(threshold, values) {
+
+            // эти переменные добавлены для наглядности их можно удалить и напрямую работать с threshold и values
+            // так как аргументы функции createNumbers находятся в лексическом окружении
+            // они также будут сохранены в замыкании
+            let privateThreshold = threshold;
+            let privateValues = values;
+
+            return {
+                getGreaterThanThreshold() {
+                    return privateValues.filter(v => v > privateThreshold);
+                },
+
+                getLessThanThreshold() {
+                    return privateValues.filter(v => v < privateThreshold);
+                }
             }
         }
 
-        let numbers = new Numbers(50, [10, 20, 23, 11, 5, 6, 90, 33, 45, 67]);
+        let numbers = createNumbers(50, [10, 20, 23, 11, 5, 6, 90, 33, 45, 67]);
         let gt = numbers.getGreaterThanThreshold();
         let lt = numbers.getLessThanThreshold();
 

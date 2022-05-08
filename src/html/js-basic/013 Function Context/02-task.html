@@ -16,6 +16,36 @@
         Метод принимает массив и на консоль по очереди выводит каждый элемент массива с интервалом в одну секунду
         Сделайте два варианта с setInterval и setTimeout
         */
+
+        function showWithDelay1(array) {
+            let current = 0;
+
+            let timer = setInterval(() => {
+
+                console.log(array[current]);
+                current++;
+
+                if (current == array.length)
+                    clearInterval(timer);
+            }, 1000);
+        }
+
+        function showWithDelay2(array) {
+
+            function show(index) {
+                console.log(array[index]);
+                index++;
+
+                if (index < array.length)
+                    setTimeout(show, 1000, index);
+            }
+
+            show(0);
+        }
+
+        let testArray = [1, 2, 3, 4, 5, 6, 7, 8];
+        showWithDelay1(testArray);
+        showWithDelay2(testArray);
     </script>
 </body>
 

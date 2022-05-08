@@ -34,6 +34,14 @@
         </div>
     </template>
 
+    <template id="product-on-sale">
+        <div>
+            <div class="bg" style="background-image: url('{{imagePath}}');"></div>
+            <strike>{{oldPrice}}$</strike>
+            <p>{{price}}$</p>
+        </div>
+    </template>
+
     <template id="advertisement">
         <div>
             <a href="{{url}}" target="_blank">
@@ -76,9 +84,21 @@
         class Product extends CatalogItem {
             price;
 
-            constructor(imageaPath, price) {
-                super(imageaPath, "#product");
+            constructor(imageaPath, price, templateSelector = "#product") {
+                super(imageaPath, templateSelector);
                 this.price = price;
+            }
+        }
+
+        class ProductWithDiscount extends Product {
+            discount;
+            oldPrice;
+
+            constructor(imagePath, price, discount) {
+                super(imagePath, price, "#product-on-sale");
+                this.discount = discount;
+                this.oldPrice = this.price;
+                this.price = this.price - (this.price / 100 * this.discount);
             }
         }
 
@@ -100,6 +120,11 @@
             }
 
             add(item) {
+                if (item instanceof CatalogItem != true) {
+                    alert("Данный метод принимает только классы производные от CatalogItem");
+                    return;
+                }
+
                 this.items.push(item);
             }
 
@@ -112,11 +137,13 @@
 
         let catalog = new Catalog("#catalog");
 
+        catalog.add({ test: 123 }); // проверка добавления объекта, который не наследовался от CatalogItem
+
         catalog.add(new Product("images/img1.jpg", 35.55));
         catalog.add(new Product("images/img2.jpg", 25.25));
         catalog.add(new Advertisement("images/banner1.jpg", "https://itvdn.com/ru/catalog"));
         catalog.add(new Product("images/img3.jpg", 14.55));
-        catalog.add(new Product("images/img4.jpg", 65.55));
+        catalog.add(new ProductWithDiscount("images/img4.jpg", 65.55, 20)); // продукт со скидкой
         catalog.add(new Advertisement("images/banner2.jpg", "https://itvdn.comru/ru/specialities"));
 
         catalog.show();

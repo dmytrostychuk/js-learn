@@ -81,6 +81,7 @@
         /*
         Задание:
         Найдите и исправьте ошибку, связанную с использованием контекста.
+        Ошибка была на 145 строке из за того что в обработчике контекстом является иницатор события, а не экземпляр класс Task
         */
         let taskNameInput = document.querySelector("#task-name-input");
         let addTaskButton = document.querySelector("#add-task-btn");
@@ -141,7 +142,7 @@
                 this.div.classList.add("task");
 
                 let input = document.createElement("input");
-                input.addEventListener("click", this.changeState);
+                input.addEventListener("click", this.changeState.bind(this));
                 input.type = "checkbox";
 
                 let p = document.createElement("p");

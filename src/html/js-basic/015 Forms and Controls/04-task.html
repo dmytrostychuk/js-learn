@@ -92,7 +92,7 @@
         Сделайте так, чтобы при нажатии на кнопку "Сохранить" появлялось сообщение "Вы действительно хотите сохранить изменения?"
         Если пользователь нажимает на Да - изменения сохраняются, Отмена - изменения не применяются
         */
-       
+
         let users = [
             {
                 balance: '1250.89',
@@ -207,7 +207,7 @@
 
                 for (let index = 0; index < data.length; index++) {
                     const currentData = data[index];
-                    
+
                     let li = document.createElement("li");
                     li.textContent = displayFn(currentData);
                     li.dataset.index = index;
@@ -230,7 +230,7 @@
             }
         }
 
-        // Класс для работы с формой, редактирующей информацию о пользователе
+        // Класс для работы с форомой, редактирующей информацию о пользователе
         class UserFormService {
             currentUser;
             form;
@@ -275,7 +275,11 @@
         });
 
         saveButton.addEventListener("click", function () {
-            formService.saveForm();
+            let message = "Вы действительно хотите сохранить изменения?";
+            if (confirm(message))
+                formService.saveForm();
+            else
+                formService.fillForm(listService.selectedData);
         });
 
     </script>

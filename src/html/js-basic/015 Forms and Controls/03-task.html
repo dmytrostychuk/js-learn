@@ -56,8 +56,14 @@
 
         <div class="form-group">
             <label for="price">Валюта</label>
-            <input type="radio" id="currency" name="currency" value="USD" checked> USD
-            <input type="radio" id="currency" name="currency" value="EUR"> EUR
+           <select name="currecny" id="currency">
+               <option value="USD">U.S. Dollar</option>
+               <option value="RUB">Russian Ruble</option>
+               <option value="UAH">Ukrainian Hryvnia</option>
+               <option value="EUR">Euro</option>
+               <option value="PLN">Polish Zloty</option>
+               <option value="CHF">Swiss Franc</option>
+           </select>
         </div>
         <br>
         <input id="saveButton" type="button" value="Сохранить">
@@ -78,7 +84,7 @@
         value - PLN, текст для пользователя - Polish Zloty
         value - CHF, текст для пользователя - Swiss Franc
         
-        Поведение функции addRow не должно измениться
+        Поведение функции addRow не должно изменится
         */
         let productForm = document.forms.productForm;
         let productsTable = document.querySelector("#productsTable");

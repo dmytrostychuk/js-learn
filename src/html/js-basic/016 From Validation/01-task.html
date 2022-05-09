@@ -15,6 +15,10 @@
             width: 75px;
             display: inline-block;
         }
+
+        .hint {
+            display: none;
+        }
     </style>
 </head>
 
@@ -38,11 +42,37 @@
     <script>
         /*
         Задание:
-        1. При нажатии на кнопку "Зарегистрироваться" (не используя события click) выведите с помощью alert
+        1. При нажатии на кнопек "Зарегистрироваться" (не используя события click) выведите с помощью alert
         информацию, которую ввел пользователь в поля login и password.
         2. В момент, когда поле ввода login получает фокус, покажите подсказку, которая находится в span#loginHint
            В момент, когда фокус получает поле ввода password - подсказку span#passwordHint
         */
+
+        const form = document.forms[0];
+
+        form.addEventListener("submit", function (e) {
+            let login = form.login.value;
+            let password = form.login.password;
+            alert(login + " " + password);
+
+            e.preventDefault();
+        });
+
+        form.login.addEventListener("focus", function () {
+            document.querySelector("#loginHint").style.display = "inline";
+        });
+
+        form.login.addEventListener("blur", function () {
+            document.querySelector("#loginHint").style.display = "none";
+        });
+
+        form.password.addEventListener("focus", function () {
+            document.querySelector("#passwordHint").style.display = "inline";
+        });
+
+        form.password.addEventListener("blur", function () {
+            document.querySelector("#passwordHint").style.display = "none";
+        });
     </script>
 </body>
 

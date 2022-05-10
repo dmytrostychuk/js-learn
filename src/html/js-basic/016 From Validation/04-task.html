@@ -60,29 +60,29 @@
     <form id="output">
         <div class="form-group">
             <label for="firstName">Имя</label>
-            <input type="text" name="firstName" id="firstName">
+            <input type="text" name="firstName" id="firstName" required>
         </div>
         <div class="form-group">
             <label for="lastName">Фамилия</label>
-            <input type="text" name="lastName" id="lastName">
+            <input type="text" name="lastName" id="lastName" required>
         </div>
         <div class="form-group">
             <label for="companyName">Компания</label>
-            <input type="text" name="companyName" id="companyName">
+            <input type="text" name="companyName" id="companyName" required>
         </div>
         <div class="form-group">
             <label for="balance">Баланс</label>
-            <input type="number" name="balance" id="balance">
+            <input type="number" name="balance" id="balance" required min="1000">
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" name="email" id="email">
+            <input type="email" name="email" id="email" required>
         </div>
         <div class="form-group">
             <label for="age">Возраст</label>
-            <input type="number" name="age" id="age">
+            <input type="number" name="age" id="age" required min="18">
         </div>
-        <input type="button" value="Save" id="saveButton">
+        <input type="submit" value="Save" id="saveButton">
         <input type="reset" value="Reset">
         <input type="button" value="Delete" id="deleteButton">
     </form>
@@ -95,7 +95,7 @@
         email - значение должно быть в формате электронного адреса
         age - значение должно быть больше 18
 
-        Для предотвращения перегрузки страницы отменяйте действие по умолчанию, обрабатывая 
+        Для предотвращения перегрузки страницы отменяйте действие по умолчанию обрабатывая 
         событие submit.
         */
 
@@ -249,7 +249,7 @@
             }
         }
 
-        // Класс для работы с формой, редактирующей информацию о пользователе
+        // Класс для работы с форомой, редактирующей информацию о пользователе
         class UserFormService {
             currentUser;
             form;
@@ -299,8 +299,9 @@
             formService.fillForm(listService.selectedData);
         });
 
-        saveButton.addEventListener("click", function () {
+        document.forms[0].addEventListener("submit", function (e) {
             formService.saveForm();
+            e.preventDefault();
         });
 
         // удаляем и очищаем форму

@@ -10,12 +10,20 @@
 
 <body>
     <textarea rows="10" cols="30"></textarea>
+
     <script>
         /*
         Задание:
-        Сделайте так чтобы значение, введенное в поле ввода на данной странице, сохранялось при каждом изменении.
+        Сделайте так чтобы значенеи, введенное в поле ввода на данной странцие сохранялось при каждом изменении.
         Когда пользователь повторно зайдет на эту страницу, поле ввода должно содержать последнее введенное значение.
         */
+        const textare = document.querySelector("textarea");
+        let text = localStorage.getItem("text");
+        if (text) textare.value = text;
+
+        textare.addEventListener("input", function () {
+            localStorage.setItem("text", textare.value);
+        });
     </script>
 </body>
 

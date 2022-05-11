@@ -16,6 +16,17 @@
             width: 75px;
             display: inline-block;
         }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        td,
+        th {
+            padding: 8px;
+        }
     </style>
 </head>
 
@@ -48,6 +59,13 @@
         </div>
     </form>
 
+    <br>
+
+    <button id="showAllButton">Показать все</button>
+    <button id="deleteAllButton">Очистить localStorage</button>
+
+    <table id="localStorageContent"></table>
+
     <script>
         /*
         Задание:
@@ -63,7 +81,7 @@
             let key = form.keyInput.value;
             let value = form.valueInput.value;
 
-            localStorage.setItem(key, value); 
+            localStorage.setItem(key, value);
             form.reset();
         });
 
@@ -73,8 +91,31 @@
             const form = document.forms.readForm;
             let key = form.keyInput.value;
 
-            let value = localStorage.getItem(key); 
+            let value = localStorage.getItem(key);
             alert(value);
+        });
+
+        const table = document.querySelector("#localStorageContent");
+        const showAllButton = document.querySelector("#showAllButton");
+        const deleteAllButton = document.querySelector("#deleteAllButton");
+
+        function showLocalStorageContent() {
+            table.innerHTML = "";
+
+            for (let i = 0; i < localStorage.length; i++) {
+                let key = localStorage.key(i);
+                let value = localStorage.getItem(key);
+                table.insertAdjacentHTML("afterbegin", `<tr><td>${key}</td><td>${value}</td></tr>`);
+            }
+        }
+
+        showAllButton.addEventListener("click", function () {
+            showLocalStorageContent();
+        });
+
+        deleteAllButton.addEventListener("click", function () {
+            localStorage.clear();
+            showLocalStorageContent();
         });
     </script>
 </body>

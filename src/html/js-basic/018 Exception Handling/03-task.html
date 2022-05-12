@@ -14,6 +14,7 @@
         Задание:
         Добавьте в данный сценарий обработку исключений для той части кода, где исключение может возникнуть.
         */
+
         class Rect {
             constructor(width, height) {
                 this.width = width;
@@ -59,8 +60,12 @@
 
         let r1 = new Rect(10, 20);
 
-        r1.height = -10; // ошибка
-        r1.width = 30;
+        try {
+            r1.height = -10; // ошибка
+            r1.width = 30;
+        } catch (error) {
+            console.log(error.message)
+        }
 
         console.log("width " + r1.width);
         console.log("height " + r1.height);

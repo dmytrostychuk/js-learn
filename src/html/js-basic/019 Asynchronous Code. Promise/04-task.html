@@ -16,7 +16,7 @@
         Функция download имитирует асинхронную операцию, которая скачивает данные с сервера. На выполнение асинхронной 
         операции затрачивается до 5 секунд времени. 
         При нажатии на кнопку "Скачать" запустите метод download 5 раз и сделайте так чтобы в момент, когда все промисы перейдут
-        в состояние fulfilled, выведите сообщение "Всей файлы скачаны"
+        в состояние fulfilled выведите сообщение "Всей файлы скачаны"
         */
         function download() {
             return new Promise(function (resolve, reject) {
@@ -24,6 +24,17 @@
                 setTimeout(() => resolve("downloaded data"), random);
             });
         }
+
+        document.querySelector("button").addEventListener("click", function () {
+            let promises = [];
+            let parallelOperationCount = 5;
+
+            for (let i = 0; i < parallelOperationCount; i++) {
+                promises.push(download());
+            }
+
+            Promise.all(promises).then(() => alert("Всей файлы скачаны"));
+        });
     </script>
 </body>
 

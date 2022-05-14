@@ -15,6 +15,25 @@
         Напишите сценарий, который при загрузке страницы выполнит GET запрос на https://jsonplaceholder.typicode.com/photos
         и выведет на странице все изображения в виде <img>, которые будут получены в ответе.
         */
+
+        let url = "https://jsonplaceholder.typicode.com/photos";
+        let promise = fetch(url);
+
+        promise
+            .then(response => response.json(), error => console.error(errro.message))
+            .then(json => renderImageLibrary(json));
+
+        function renderImageLibrary(photos) {
+            let docFragment = document.createDocumentFragment();
+
+            photos.forEach(photo => {
+                let img = document.createElement("img");
+                img.src = photo.thumbnailUrl;
+                docFragment.append(img);
+            });
+
+            document.body.append(docFragment);
+        }
     </script>
 </body>
 
